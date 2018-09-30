@@ -29,7 +29,7 @@ Why is this here? Next steps are to retrain the network to recognise the Miele (
 * Retrain the Movidius, and mount the camera in a better position.
 * Invite some visitors to test the ~~death robot~~ Miele on.
 
-# Credits
+## Credits
 The [Movidious Compute Stick](https://software.intel.com/en-us/neural-compute-stick) worked with the Pi right out of the box.
 The demo apps were easy to use and understand. Sample apps can be found at https://github.com/movidius/ncappzoo.
 The version of the *live-object-detector* here is slightly modified to publish object name and co-ordinates via MQTT.
