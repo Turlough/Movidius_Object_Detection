@@ -1,3 +1,0 @@
-
-E0E040BF	Power on
-E0E019E6	Power off
