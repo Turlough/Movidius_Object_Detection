@@ -4,6 +4,7 @@ This is a work in progress...
 ## Summary
 Having been gifted a [Miele Scout Robot Floor Sweeper](https://www.miele.ie/domestic/robot-vacuum-cleaner-2750.htm), it was time to begin hacking...
 
+### IRrecvDumpV2 and IRsendRawCodesToMiele
 The Miele comes with an IR remote control. 
 
 In this project, we have an IR reader project (*IRrecvDumpV2*) to establish what codes are sent by the Miele remote, and an IR transmitter project (*IRsendRawCodesToMiele*) to send the same codes via an Arduino with an IR LED attached. Details of the IR reader results can be found in the Resources directory, and images of the hardware setup are in the Images directory.
@@ -18,6 +19,10 @@ Commands are sent to the Arduino over Serial (at the moment); the Arduino parses
 The WASD commands are followed by 'continuation' codes, delivered every 50 milliseconds. This simulates holding down the (orignal) remote buttons. The start and base commands do not require to be followed by continuation codes- send once, and the Miele does the rest.
 
 Details of IR control codes and some comments are in the Resources directory.
+
+### mqtt_subscriber
+The Tx pin of the ESP8266 is connected to the Arduino Rx pin, and relays commands over Serial to the IR LED.
+Change wifi credentials, broker, etc.
 
 ### live-object-detector
 The *live-object-detector* directory contains an Inception image categoriser, which I have running on a Raspberry Pi with a [Movidious Compute Stick](https://software.intel.com/en-us/neural-compute-stick). This surveys the room containing the Miele. I have not retrained it yet, but have taken the example code and modified it to publish categories and co-ordinates via MQTT. Replace the public eclipse broker with the url of your own broker. And add authentication. 
