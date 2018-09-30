@@ -4,7 +4,7 @@ This is a work in progress...
 ## Summary
 Having been gifted a [Miele Scout Robot Floor Sweeper](https://www.miele.ie/domestic/robot-vacuum-cleaner-2750.htm), it was time to begin hacking...
 
-### IRrecvDumpV2 and IRsendRawCodesToMiele
+### The IR projects
 The Miele comes with an IR remote control. 
 
 In this project, we have an IR reader project (*IRrecvDumpV2*) to establish what codes are sent by the Miele remote, and an IR transmitter project (*IRsendRawCodesToMiele*) to send the same codes via an Arduino with an IR LED attached. Details of the IR reader results can be found in the Resources directory, and images of the hardware setup are in the Images directory.
