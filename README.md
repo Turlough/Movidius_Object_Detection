@@ -1,4 +1,4 @@
-# Movidius_Object_Detection
+# MQTT to IR relay, with object detection
 This is a work in progress...
 
 ## Summary
