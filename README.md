@@ -30,7 +30,8 @@ The *live-object-detector* directory contains an Inception image categoriser, wh
 Why is this here? Next steps are to retrain the network to recognise the Miele (training data: split a video of the Miele in action into training jpegs), and shoes (training set from [ImageNet](http://image-net.org/synset?wnid=n04199027#). Why shoes? Because visitors wear shoes, and the Miele will need a target to follow... :)
 
 ## Next steps
-* MQTT subscriber on an ESP8266 (or ESP32) to relay commands to the IR LED. Mount this in a commanding position, and provide power.
+* Increase power of IR LED by using two of them, and a transistor to deliver more current (range is only a few meters when connected directly to the PWM pin)
+* Mount the IR LED in a more commanding position.
 * Retrain the Movidius, and mount the camera in a better position.
 * Invite some visitors to test the ~~death robot~~ Miele on.
 
