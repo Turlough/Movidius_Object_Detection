@@ -1,9 +1,18 @@
+
+/**
+ * Standard mosquitto client implementation.
+ * Run this on an ESP8266.
+ * Connect the Tx pin to the Rx pin of the Arduino.
+ * Commands received via MQTT are relayed 
+ * to the Arduino over the serial connection.
+*/
+
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
 //edit the following for your wifi network and mqtt broker
-#define wifi_ssid "ssid"
-#define wifi_password "password"
+#define wifi_ssid "oort"
+#define wifi_password "0lympusM@ns"
 
 #define mqtt_server "iot.eclipse.org"
 #define mqtt_port 1883
@@ -16,60 +25,56 @@ WiFiClient espClient;
 PubSubClient client;
 
 void setup() {
-  Serial.begin(115200);
+  //The ESP6266 can communicate at 115200 baud
+  //but we need to communicate with the Arduino at 9600 baud
+  Serial.begin(9600);
+  digitalWrite(BUILTIN_LED, LOW);
   setup_wifi();
   client.setClient(espClient);
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
+  digitalWrite(BUILTIN_LED, HIGH);
 }
 
 void setup_wifi() {
+  pinMode(LED_BUILTIN, OUTPUT);
   delay(10);
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(wifi_ssid);
 
+  Serial.println(wifi_ssid);
   WiFi.begin(wifi_ssid, wifi_password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected... ");
-  Serial.print("IP address: ");
+
   Serial.println(WiFi.localIP());
 }
 
 void reconnect() {
-  // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Attempt to connect
-
     if (client.connect("ESP8266Client", mqtt_user, mqtt_password)) {
-      Serial.println("connected");
       client.subscribe(in_topic);
+      digitalWrite(BUILTIN_LED, HIGH);
     } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
       delay(5000);
     }
   }
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
- Serial.print("Message arrived [");
- Serial.print(topic);
- Serial.print("] ");
+
+ digitalWrite(BUILTIN_LED, LOW);
  for (int i = 0; i < length; i++) {
   char receivedChar = (char)payload[i];
-  Serial.print(receivedChar);
+
+  //The received character acts as a command
+  Serial.println(receivedChar);
+  
  }
- Serial.println();
+ delay(100);
+ digitalWrite(BUILTIN_LED, HIGH);
 }
 
 void loop() {

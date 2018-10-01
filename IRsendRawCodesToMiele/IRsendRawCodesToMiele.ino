@@ -1,7 +1,28 @@
 /*
- * Arduino code for sending control signals to Miele Scout Robot Floor Sweeper
+ * Raw control data captured from the IR remote
+ * for the Miele Scout Robot Floor cleaner.
+ * Send single character commands over Serial to the Arduino.
  * 
- * An IR LED must be connected to Arduino PWM pin 3.
+ * Commands can be sent via USB, or separately to the Rx pin, e.g. via an ESP8266
+ * (remember to disconnect the Rx pin while uploading this sketch)
+ * Set the baud rate of the ESP8266 to 9600.
+ * 
+ * Connect an IR LED to PWM pin 3. 
+ * The command characters will cause control sequences to be transmitted by the LED using PWM
+ * 
+ * The following codes are recognised:
+ * 
+ * MANUAL CONTROL CODES
+ * --------------------
+ * w, a, s, d for up, left, back, right. 
+ * Note that 'continuation' codes will be sent after these commands-
+ * these mimic holding the remote buttons down.
+ * q terminates the 'continuation' code transmission
+ * 
+ * AUTO CONTROL CODES (no continuation codes need be sent for these.
+ * ------------------
+ * b sends 'return to base' sequence.
+ * v sends 'start/pause' sequence
  * 
  */
 
