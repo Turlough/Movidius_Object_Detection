@@ -176,7 +176,7 @@ if __name__ == '__main__':
                          Intel® Movidius™ Neural Compute Stick." )
 
     parser.add_argument( '-g', '--graph', type=str,
-                         default='../../caffe/SSD_MobileNet/graph',
+                         default='graph',
                          help="Absolute path to the neural network graph file." )
 
     parser.add_argument( '-v', '--video', type=int,
@@ -185,7 +185,7 @@ if __name__ == '__main__':
                                ex. 0 for /dev/video0" )
 
     parser.add_argument( '-l', '--labels', type=str,
-                         default='../../caffe/SSD_MobileNet/labels.txt',
+                         default='labels.txt',
                          help="Absolute path to labels file." )
 
     parser.add_argument( '-M', '--mean', type=float,
@@ -212,8 +212,8 @@ if __name__ == '__main__':
     camera = cv2.VideoCapture( ARGS.video )
 
     # Set camera resolution
-    camera.set( cv2.CAP_PROP_FRAME_WIDTH, 620 )
-    camera.set( cv2.CAP_PROP_FRAME_HEIGHT, 480 )
+    #    camera.set( cv2.CAP_PROP_FRAME_WIDTH, 620 )
+    #    camera.set( cv2.CAP_PROP_FRAME_HEIGHT, 480 )
 
     # Load the labels file
     labels =[ line.rstrip('\n') for line in
