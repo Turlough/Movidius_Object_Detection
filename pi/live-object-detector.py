@@ -203,14 +203,16 @@ if __name__ == '__main__':
                         default="bgr",
                         help="RGB vs BGR color sequence. This is network dependent.")
 
-    parser.add_argument('-c', '--remotecam', type=str,
-                        default="http://172.16.92.207:8081",
+    parser.add_argument('-r', '--remotecam', type=str,
                         help="RGB vs BGR color sequence. This is network dependent.")
 
     ARGS = parser.parse_args()
 
-    # Create a VideoCapture object
-    camera = cv2.VideoCapture(ARGS.video)
+    # if no remotecam specified, use local
+    try:
+        camera = cv2.VideoCapture(ARGS.remotecam)
+    except:
+        camera = cv2.VideoCapture(ARGS.video)
 
     # Set camera resolution
     # camera.set(cv2.CAP_PROP_FRAME_WIDTH, 620)
